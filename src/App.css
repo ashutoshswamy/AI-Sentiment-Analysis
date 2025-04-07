@@ -1,0 +1,441 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --bg-primary: #0a0a10;
+  --bg-secondary: #15151f;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3cc;
+  --accent: #8a2be2;
+  --accent-gradient: linear-gradient(135deg, #8a2be2, #4361ee);
+  --accent-secondary: #4361ee;
+  --accent-tertiary: #ff0099;
+  --accent-hover: #9d4edd;
+  --error: #ff5c8d;
+  --border: #2d2d3a;
+  --positive: #00c896;
+  --neutral: #f8cb5c;
+  --negative: #ff686b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  background-image: radial-gradient(
+      circle at 15% 50%,
+      rgba(138, 43, 226, 0.08) 0%,
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(67, 97, 238, 0.08) 0%,
+      transparent 25%
+    );
+  background-attachment: fixed;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
+  padding: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent-gradient);
+  z-index: 1;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.logo-icon {
+  color: var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.tagline {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+
+.input-container {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background-color: rgba(10, 10, 16, 0.7);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  height: 150px;
+  resize: vertical;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
+}
+
+button {
+  padding: 14px 28px;
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 15px rgba(138, 43, 226, 0.4);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(138, 43, 226, 0.3);
+}
+
+button:disabled {
+  background: linear-gradient(135deg, #696969, #4f4f4f);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+button.loading {
+  position: relative;
+  padding-left: 48px;
+}
+
+button.loading:before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+.error-message {
+  color: var(--error);
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.error-message::before {
+  content: "!";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: var(--error);
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.result {
+  margin-top: 32px;
+  padding: 28px;
+  border-radius: 12px;
+  background-color: rgba(10, 10, 16, 0.7);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.sentiment-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-align: center;
+  filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.3));
+}
+
+.vibe-meter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.vibe-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.pulse-animation {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent) 50%,
+    transparent 100%
+  );
+  bottom: -4px;
+  left: 0;
+  opacity: 0.7;
+  animation: pulse-line 3s infinite;
+}
+
+@keyframes pulse-line {
+  0% {
+    transform: scaleX(0.3);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleX(0.3);
+    opacity: 0.2;
+  }
+}
+
+.result-content {
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.result-content h2,
+.result-content h3,
+.result-content h4 {
+  margin-top: 16px;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  font-family: "Poppins", sans-serif;
+}
+
+.result-content strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.result-content ul {
+  padding-left: 24px;
+  margin: 12px 0;
+  list-style-type: none;
+}
+
+.result-content ul li {
+  position: relative;
+  padding-left: 8px;
+  margin-bottom: 8px;
+}
+
+.result-content ul li::before {
+  content: "•";
+  color: var(--accent);
+  position: absolute;
+  left: -16px;
+  top: 0;
+  font-size: 1.2rem;
+}
+
+.result-content code {
+  background-color: rgba(138, 43, 226, 0.15);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: "Menlo", "Monaco", "Courier New", monospace;
+  font-size: 0.9em;
+  color: var(--accent-secondary);
+}
+
+.result-content pre {
+  background-color: rgba(21, 21, 31, 0.8);
+  padding: 18px;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 16px 0;
+  border-left: 4px solid var(--accent);
+}
+
+.developer-info {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.social-links a {
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+  background-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(138, 43, 226, 0.4);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 24px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .sentiment-icon {
+    font-size: 2.5rem;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px 20px;
+  }
+}
